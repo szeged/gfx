@@ -413,6 +413,7 @@ pub trait Application<R: gfx::Resources>: Sized {
     }
     #[cfg(all(target_os = "windows", not(feature = "vulkan")))]
     fn launch_default(wb: winit::WindowBuilder) where Self: Application<DefaultResources> {
+        println!("default: d3d11");
         launch_d3d11::<Wrap<_, _, Self>>(wb);
     }
     #[cfg(feature = "metal")]
