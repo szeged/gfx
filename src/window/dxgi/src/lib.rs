@@ -23,6 +23,7 @@ extern crate gfx_core as core;
 extern crate gfx_device_dx11 as device_dx11;
 
 use std::ptr;
+use std::rc::Rc;
 use winit::os::windows::WindowExt;
 use core::{format, handle as h, factory as f, memory, texture as tex};
 use core::texture::Size;
@@ -30,7 +31,7 @@ use device_dx11::{Device, Factory, Resources};
 
 
 pub struct Window {
-    inner: winit::Window,
+    inner: Rc<winit::Window>,
     swap_chain: *mut winapi::IDXGISwapChain,
     driver_type: winapi::D3D_DRIVER_TYPE,
     color_format: format::Format,
@@ -117,10 +118,10 @@ pub fn init_raw(wb: winit::WindowBuilder, events_loop: &winit::EventsLoop, color
         Ok(w) => w,
         Err(_) => return Err(InitError::Window),
     };
-    init_existing_raw(inner, color_format)
+    init_existing_raw(Rc::new(inner), color_format)
 }
 
-pub fn init_existing_raw(inner: winit::Window,
+pub fn init_existing_raw(inner: Rc<winit::Window>,
                          color_format: format::Format)
                          -> Result<(Window, Device, Factory, h::RawRenderTargetView<Resources>), InitError>
 {
