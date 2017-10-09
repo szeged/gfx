@@ -26,7 +26,7 @@ name = "gfx_app"
 log = "0.3"
 env_logger = "0.4"
 glutin = "0.10"
-winit = "0.8"
+winit = "0.7"
 gfx_core = { path = "src/core", version = "0.7.1" }
 gfx_corell = { path = "src/corell", version = "0.1" }
 gfx = { path = "src/render", version = "0.16" }
