@@ -11,3 +11,6 @@ members = [
     "src/warden",
     "examples",
 ]
+
+[patch.crates-io]
+serde_derive = { git = "https://github.com/servo/serde", branch = "deserialize_from_enums8" }
